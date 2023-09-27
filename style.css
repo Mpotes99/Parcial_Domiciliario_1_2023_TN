@@ -1,15 +1,7 @@
-
+#app{
+    height: 90vh;
+}
 
 body {
-    font-family: 'Segoe UI Local', 'Segoe UI Web (West European)';
-  }
-body{
-    background-image: url(img/banner.jpg);
-}
-main{
-    color:white;
-    padding-top: 200px;
-}
-h1{
-    font-weight: 500;
+    background-image: url(img/fondo.png);
 }
