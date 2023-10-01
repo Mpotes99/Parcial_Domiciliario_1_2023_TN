@@ -5,8 +5,8 @@ new Vue({
     apellido: '',
     nombre: '',
     fechaNacimiento: '',
-    sexo: 'macho',
-    especie: 'perro',
+    sexo: '',
+    especie: '',
     raza: '',
     aceptoTerminos: false,
     dniFalso: null,
@@ -20,53 +20,45 @@ new Vue({
     verificarYGenerarDni() {
       if (this.dniGenerado) {
         alert('El DNI ya ha sido generado. No puedes modificar el formulario.');
-        return;
+        return; 
       }
+
+      // Asigna los valores de los campos del formulario a las propiedades correspondientes.
+      const apellido = this.apellido;
+      const nombre = this.nombre;
+      const fechaNacimiento = this.fechaNacimiento;
+      const sexo = this.sexo;
+      const especie = this.especie;
+      const raza = this.raza;
 
       // Lógica para generar un DNI falso
       const dniFalso = Math.floor(Math.random() * (99999999 - 10000000 + 1) + 10000000);
       this.dniFalso = dniFalso;
       this.dniGenerado = true;
 
-      // Limpia el formulario
+    /*  // Limpia el formulario
       this.apellido = '';
       this.nombre = '';
       this.fechaNacimiento = '';
-      this.sexo = 'macho';
-      this.especie = 'perro';
+      this.sexo = '';
+      this.especie = '';
       this.raza = '';
-      this.aceptoTerminos = false;
-      this.$refs.foto.value = '';
+      this.aceptoTerminos = false;*/
 
-      // Guarda los datos en localStorage (puedes mejorar esta parte)
-      const datosMascota = {
-        apellido: this.apellido,
-        nombre: this.nombre,
-        fechaNacimiento: this.fechaNacimiento,
-        sexo: this.sexo,
-        especie: this.especie,
-        raza: this.raza,
-        fotoMascota: this.fotoMascota
-      };
-      localStorage.setItem('datosMascota', JSON.stringify(datosMascota));
+      // Actualiza la foto de la mascota si se seleccionó una
+      const fotoInput = this.$refs.foto;
+      if (fotoInput.files && fotoInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.fotoMascota = e.target.result;
+        };
+        reader.readAsDataURL(fotoInput.files[0]);
+      }
     }
   },
   computed: {
     nombreCompleto() {
       return `${this.nombre} ${this.apellido}`;
-    }
-  },
-  created() {
-    // Carga los datos previamente guardados en localStorage (puedes mejorar esta parte)
-    const datosMascota = JSON.parse(localStorage.getItem('datosMascota'));
-    if (datosMascota) {
-      this.apellido = datosMascota.apellido;
-      this.nombre = datosMascota.nombre;
-      this.fechaNacimiento = datosMascota.fechaNacimiento;
-      this.sexo = datosMascota.sexo;
-      this.especie = datosMascota.especie;
-      this.raza = datosMascota.raza;
-      this.fotoMascota = datosMascota.fotoMascota;
     }
   }
 });
