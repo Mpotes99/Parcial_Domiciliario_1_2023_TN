@@ -11,7 +11,7 @@ new Vue({
     aceptoTerminos: false,
     dniFalso: null,
     dniGenerado: false,
-    fotoMascota: null // Almacena la foto de la mascota
+    fotoMascota: null 
   },
   methods: {
     mostrarFormulario() {
@@ -24,7 +24,7 @@ new Vue({
       }
   
 
-      // Asigna los valores de los campos del formulario a las propiedades correspondientes.
+      
       const apellido = this.apellido;
       const nombre = this.nombre;
       const fechaNacimiento = this.fechaNacimiento;
@@ -32,14 +32,14 @@ new Vue({
       const especie = this.especie;
       const raza = this.raza;
 
-      // Lógica para generar un DNI falso
+      // generar un DNI falso
       const dniFalso = Math.floor(Math.random() * (99999999 - 10000000 + 1) + 10000000);
       this.dniFalso = dniFalso;
 
-      // Asigna true a dniGenerado después de la generación del DNI
+      //  true a dniGenerado después de la generación del DNI
       this.dniGenerado = true;
 
-      // Actualiza la foto de la mascota si se seleccionó una
+      // Actualiza la foto de la mascot
       const fotoInput = this.$refs.foto;
       if (fotoInput.files && fotoInput.files[0]) {
         const reader = new FileReader();
@@ -48,7 +48,7 @@ new Vue({
         };
         reader.readAsDataURL(fotoInput.files[0]);
       }
-    // Guardar datos en localStorage
+    // Guardar datos en localstorage
     const datosMascota = {
       apellido: this.apellido,
       nombre: this.nombre,
@@ -64,7 +64,7 @@ new Vue({
     },
 
     cargarDatosGuardados() {
-    // Cargar datos desde localStorage
+    // Cargar datos  localsstorage
     const datosMascota = localStorage.getItem('datosMascota');
     if (datosMascota) {
       const parsedData = JSON.parse(datosMascota);
@@ -84,7 +84,7 @@ new Vue({
       // Limpiar datos de localStorage
       localStorage.removeItem('datosMascota');
     
-      // Restablecer las propiedades de los datos
+    
       this.apellido = '';
       this.nombre = '';
       this.fechaNacimiento = '';
@@ -103,11 +103,11 @@ new Vue({
     }
   },
   created() {
-    // Cargar datos al iniciar la aplicación
+    // Cargar datos 
     this.cargarDatosGuardados();
   },
   beforeDestroy() {
-    // Limpiar datos al salir de la aplicación
+    // Limpiar datos 
     this.limpiarLocalStorage();
   }
 });
