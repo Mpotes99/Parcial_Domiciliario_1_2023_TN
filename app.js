@@ -49,6 +49,9 @@ new Vue({
         reader.readAsDataURL(fotoInput.files[0]);
       }
     // Guardar datos en localstorage
+
+
+    
     const datosMascota = {
       apellido: this.apellido,
       nombre: this.nombre,
