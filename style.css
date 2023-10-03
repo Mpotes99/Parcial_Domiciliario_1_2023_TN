@@ -28,7 +28,7 @@ body {
 
 #app {
     min-height: 100%;
-    flex-direction: column;
+    height: 100vh;
 }
 
 
@@ -37,7 +37,28 @@ footer {
     background-color: #f8f9fa;
     text-align: center;
     padding: 10px;
-    position: absolute; 
     bottom: 0;
     right: 0;
+    position: fixed;
+    width: 100%;
+}
+
+.formularioo{
+    margin-bottom: 100px;
+    height: 100vh;
+}
+.fondoanimalito{
+    background-color: rgb(255, 255, 255);
+    padding: 30px;
+    border-radius: 10px;
+}
+.fondoanimalito1{
+    background-color: rgb(255, 255, 255);
+    padding: 30px;
+    border-radius: 10px;
+    height: 200vh;
+}
+.btnlimpia{
+    padding: 10px;
+    border-radius: 10px;
 }

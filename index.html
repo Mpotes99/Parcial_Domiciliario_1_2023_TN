@@ -31,14 +31,14 @@
     </div>
   </nav>
 
-  <div id="app" class="container mt-5">
-    <div class="jumbotron text-center idcustom">
+  <div id="app" class="container mt-5 ">
+    <div class=" text-center  fondoanimalito">
       <h1 class="display-4">Una Identidad Virtual para tu Mascota</h1>
       <p class="lead">Crea el DNI de tu mascota ahora</p>
       <button class="btn btn-primary btn-lg" @click="mostrarFormulario">Comenzar!</button>
     </div>
 
-    <div v-if="mostrarForm" class="mt-4">
+    <div v-if="mostrarForm" class="mt-4 formularioo fondoanimalito1">
       <h2 class="mb-3">Crear DNI de Mascota</h2>
       <form @submit.prevent="verificarYGenerarDni">
         <div class="form-row">
@@ -99,7 +99,7 @@
       <div v-if="dniGenerado" class="mt-4 ">
         <div class="dni-mascota">
           <h2 class="dni-mascota-title">DNI de Mascota</h2>
-          <button @click="limpiarDatosGuardados" class="btn-primary">Limpiar Datos</button>
+          <button @click="limpiarDatosGuardados" class="btn-primary btnlimpia">Limpiar Datos</button>
 
           <div class=" dni-mascota-card fondodni">
             <div class="row datosdni">
