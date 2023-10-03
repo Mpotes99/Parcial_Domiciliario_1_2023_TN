@@ -22,6 +22,7 @@ new Vue({
         alert('El DNI ya ha sido generado. No puedes modificar el formulario.');
         return; 
       }
+  
 
       // Asigna los valores de los campos del formulario a las propiedades correspondientes.
       const apellido = this.apellido;
@@ -34,16 +35,9 @@ new Vue({
       // Lógica para generar un DNI falso
       const dniFalso = Math.floor(Math.random() * (99999999 - 10000000 + 1) + 10000000);
       this.dniFalso = dniFalso;
-      this.dniGenerado = true;
 
-    /*  // Limpia el formulario
-      this.apellido = '';
-      this.nombre = '';
-      this.fechaNacimiento = '';
-      this.sexo = '';
-      this.especie = '';
-      this.raza = '';
-      this.aceptoTerminos = false;*/
+      // Asigna true a dniGenerado después de la generación del DNI
+      this.dniGenerado = true;
 
       // Actualiza la foto de la mascota si se seleccionó una
       const fotoInput = this.$refs.foto;
@@ -54,11 +48,66 @@ new Vue({
         };
         reader.readAsDataURL(fotoInput.files[0]);
       }
+    // Guardar datos en localStorage
+    const datosMascota = {
+      apellido: this.apellido,
+      nombre: this.nombre,
+      fechaNacimiento: this.fechaNacimiento,
+      sexo: this.sexo,
+      especie: this.especie,
+      raza: this.raza,
+      aceptoTerminos: this.aceptoTerminos,
+      dniFalso: this.dniFalso,
+      fotoMascota: this.fotoMascota
+    };
+    localStorage.setItem('datosMascota', JSON.stringify(datosMascota));
+    },
+
+    cargarDatosGuardados() {
+    // Cargar datos desde localStorage
+    const datosMascota = localStorage.getItem('datosMascota');
+    if (datosMascota) {
+      const parsedData = JSON.parse(datosMascota);
+      this.apellido = parsedData.apellido || '';
+      this.nombre = parsedData.nombre || '';
+      this.fechaNacimiento = parsedData.fechaNacimiento || '';
+      this.sexo = parsedData.sexo || '';
+      this.especie = parsedData.especie || '';
+      this.raza = parsedData.raza || '';
+      this.aceptoTerminos = parsedData.aceptoTerminos || false;
+      this.dniFalso = parsedData.dniFalso || null;
+      this.fotoMascota = parsedData.fotoMascota || null;
+      this.dniGenerado = !!parsedData.dniFalso;
     }
-  },
+    },
+    limpiarDatosGuardados() {
+      // Limpiar datos de localStorage
+      localStorage.removeItem('datosMascota');
+    
+      // Restablecer las propiedades de los datos
+      this.apellido = '';
+      this.nombre = '';
+      this.fechaNacimiento = '';
+      this.sexo = '';
+      this.especie = '';
+      this.raza = '';
+      this.aceptoTerminos = false;
+      this.dniFalso = null;
+      this.fotoMascota = null;
+      this.dniGenerado = false;
+    }
+},
   computed: {
     nombreCompleto() {
       return `${this.nombre} ${this.apellido}`;
     }
+  },
+  created() {
+    // Cargar datos al iniciar la aplicación
+    this.cargarDatosGuardados();
+  },
+  beforeDestroy() {
+    // Limpiar datos al salir de la aplicación
+    this.limpiarLocalStorage();
   }
 });
